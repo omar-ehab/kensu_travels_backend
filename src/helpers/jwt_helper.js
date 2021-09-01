@@ -13,7 +13,7 @@ const signVerificationToken = (payload = {}) => {
     }
     JWT.sign(payload, secret, options, (err, token) => {
       if (err) {
-        reject(createError.InternalServerError());
+        reject("error while assigning verficiation token");
         return
       }
       resolve(token)
@@ -30,17 +30,16 @@ const verifyVerificationToken = (token) => {
   })
 }
 
-const signAccessToken = (payload = {}) => {
+const signAccessToken = (payload = {}, expiresIn = '10m') => {
   return new Promise((resolve, reject) => {
     const secret = process.env.ACCESS_TOKEN_SECRET
     const options = {
-      expiresIn: '10m',
+      expiresIn,
       issuer: 'kensu',
     }
-    console.log(payload);
     JWT.sign(payload, secret, options, (err, token) => {
       if (err) {
-        reject(createError.InternalServerError());
+        reject("error while assigning access token");
         return
       }
       resolve(token)
@@ -74,7 +73,7 @@ const signRefreshToken = (payload = {}) => {
     }
     JWT.sign(payload, secret, options, (err, token) => {
       if (err) {
-        reject(createError.InternalServerError());
+        reject("error while assigning refresh token");
         return;
       }
 
@@ -101,7 +100,7 @@ const verifyRefreshToken = (refreshToken) => {
         redisClient.GET(`kensu_refresh_${payload.id}`, (err, result) => {
           if (err) {
             console.log(err.message);
-            reject(createError.InternalServerError());
+            reject("error while verfing refresh token");
             return
           }
           if (refreshToken === result) { 

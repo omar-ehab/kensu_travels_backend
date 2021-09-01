@@ -1,14 +1,16 @@
 require('dotenv').config();
 const express = require('express');
 const helmet = require('helmet');
-const {fourOFour, globalErrorHandler} = require('./app/middlewares/errorHandler');
+const {fourOFour, globalErrorHandler} = require('./src/app/middlewares/errorHandler');
 const compression = require('compression');
 const rateLimit = require('express-rate-limit');
-require('./database/mongo')();
+const cors = require('cors');
+require('./src/database/mongo')();
 const app = express();
 
 //routes
-const authRoutes = require('./routes/auth');
+const authRoutes = require('./src/routes/auth');
+const adminRoutes = require('./src/routes/admin/auth');
 
 //check app env state
 const isProduction = process.env.NODE_ENV === 'production';
@@ -24,7 +26,11 @@ const PORT = process.env.PORT || 80;
 app.use(express.json());
 app.use(compression());
 app.use(helmet());
+app.use(cors());
 app.use(limiter);
+
+//admin routes
+app.use('/api/admin', adminRoutes);
 
 //auth routes
 app.use('/api/auth', authRoutes);
