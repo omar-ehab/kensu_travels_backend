@@ -1,6 +1,5 @@
 const User = require('../models/User');
 const createError = require('http-errors');
-const send_verifiecation_mail = require('../../helpers/email_verification_helper');
 const {
   signVerificationToken,
   verifyVerificationToken,
@@ -31,7 +30,7 @@ class AuthController{
         //creating verification token
         const verification_token = await signVerificationToken(reducedUser);
         //sending verification email here
-        send_verifiecation_mail(user.first_name, user.email, verification_token)
+
         //creating access and refresh tokens
         const access_token = await signAccessToken(reducedUser);
         const refresh_token = await signRefreshToken(reducedUser);

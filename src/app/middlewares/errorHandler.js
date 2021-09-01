@@ -6,6 +6,7 @@ const validateRequestSchema = (req, res, next) => {
   const errors = validationResult(req);
     if (!errors.isEmpty()) {
       next(createError.BadRequest(errors));
+      return;
     }
   next();
 }
@@ -19,8 +20,16 @@ const globalErrorHandler = (err, req, res, next) => {
   logger.error(err);
   res.send({
       success: false,
-      message: err.message,
+      message: process.env.NODE_ENV === 'production' ? errorMessage(err) : err.message,
   });
+}
+
+const errorMessage = (err) => {
+  if(err.status === 500) {
+    return "Server Error";
+  } else if(err.status === 404) {
+    return "Not Found";
+  }
 }
 
 module.exports = {

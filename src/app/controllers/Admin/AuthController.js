@@ -8,7 +8,6 @@ class AuthController{
     try {
       const admin = await Admin.findOne({email: req.body.email});
       if(admin && !admin.is_blocked) {
-        
         admin.comparePassword(req.body.password, async (err, isMatched) => {
           if(err){
             throw err;
@@ -17,10 +16,12 @@ class AuthController{
           if(isMatched) {
             const accessToken = await signAccessToken(admin._doc, "1d");
             res.json({accessToken, user: admin});
+          } else {
+            res.status(401).json({message: "incorrect email or password"});
           }
         });
       } else {
-        res.status(401).json({message: "incorrect email or password "});
+        res.status(401).json({message: "incorrect email or password"});
       }
     } catch(e) {
       return next(e);
@@ -37,6 +38,7 @@ class AuthController{
     delete admin._doc.created_at;
     delete admin._doc.updated_at;
     delete admin._doc.__v;
+    admin._doc.admin = true;
   }
 }
 
