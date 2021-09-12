@@ -28,9 +28,22 @@ class AuthController{
     }
   }
 
+  me = async (req, res, next) => {
+    try {
+      const user = {
+        id: req.user._id,
+        first_name: req.user.first_name,
+        last_name: req.user.last_name,
+        email: req.user.email,
+        mobile: req.user.mobile,
+        gender: req.user.gender,
 
-  logout = async (req, res, next) => {
+      };
 
+      res.json({user});
+    } catch(e) {
+      return next(e);
+    }
   }
 
   cleanAdminObj = (admin) => {

@@ -48,8 +48,6 @@ class AuthController{
         })
       }
     } catch(err){
-      User.deleteOne({email: req.body.email})
-      console.log(err);
       return;
     }
   }
