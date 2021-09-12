@@ -10,7 +10,8 @@ const app = express();
 
 //routes
 const authRoutes = require('./src/routes/auth');
-const adminRoutes = require('./src/routes/admin/auth');
+const adminAuthRoutes = require('./src/routes/admin/auth');
+const adminApiRoutes = require('./src/routes/admin/api');
 
 //check app env state
 const isProduction = process.env.NODE_ENV === 'production';
@@ -29,8 +30,9 @@ app.use(helmet());
 app.use(cors());
 app.use(limiter);
 
-//admin routes
-app.use('/api/admin', adminRoutes);
+//admin auth routes
+app.use('/api/admin', adminAuthRoutes);
+app.use('/api/admin', adminApiRoutes);
 
 //auth routes
 app.use('/api/auth', authRoutes);

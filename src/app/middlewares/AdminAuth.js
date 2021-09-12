@@ -14,7 +14,6 @@ const verifyAuthority = (req, res, next) => {
         err.name === 'JsonWebTokenError' ? 'Unauthorized' : err.message
       return next(createError.Unauthorized(message))
     }
-    console.log(payload);
     if(!payload.admin) {
       return next(createError.Forbidden('Forbidden from access this endpoint'));
     }
