@@ -5,6 +5,7 @@ const {fourOFour, globalErrorHandler} = require('./src/app/middlewares/errorHand
 const compression = require('compression');
 const rateLimit = require('express-rate-limit');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 require('./src/database/mongo')();
 const app = express();
 
@@ -25,9 +26,10 @@ const limiter = rateLimit({
 const PORT = process.env.PORT || 80;
 
 app.use(express.json());
+app.use(cookieParser());
 app.use(compression());
 app.use(helmet());
-app.use(cors());
+app.use(cors({origin: 'http://localhost:3000', credentials: true}));
 app.use(limiter);
 
 //admin auth routes
