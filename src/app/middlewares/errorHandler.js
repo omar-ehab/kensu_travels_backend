@@ -17,7 +17,10 @@ const fourOFour = async (req, res, next) => {
 
 const globalErrorHandler = (err, req, res, next) => {
   res.status(err.status || 500);
-  logger.error(err);
+  
+  if(err.status !== 404)
+    logger.error(err);
+
   res.send({
       success: false,
       message: process.env.NODE_ENV === 'production' ? errorMessage(err) : err.message,

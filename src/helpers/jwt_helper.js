@@ -76,9 +76,9 @@ const signRefreshToken = (payload = {}) => {
         reject("error while assigning refresh token");
         return;
       }
-
-      redisClient.SET(`kensu_refresh_${payload.id}`, token, 'EX', 14 * 24 * 60 * 60, (err, reply) => {
+      redisClient.SET(`kensu_refresh_${payload._id}`, token, 'EX', 14 * 24 * 60 * 60, (err, reply) => {
         if (err) {
+          console.log(err)
           reject(createError.InternalServerError())
           return
         }
@@ -97,7 +97,7 @@ const verifyRefreshToken = (refreshToken) => {
         if (err) {
           return reject(createError.Unauthorized())
         }
-        redisClient.GET(`kensu_refresh_${payload.id}`, (err, result) => {
+        redisClient.GET(`kensu_refresh_${payload._id}`, (err, result) => {
           if (err) {
             console.log(err.message);
             reject("error while verfing refresh token");
