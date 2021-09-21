@@ -1,0 +1,12 @@
+{"message":"_omit is not defined","level":"error","timestamp":"2021-09-20 23:31:12","label":"index.js","metadata":{}}
+{"message":"_omit is not defined","level":"error","timestamp":"2021-09-20 23:31:24","label":"index.js","metadata":{}}
+{"message":"Forbidden from access this endpoint","level":"error","timestamp":"2021-09-20 23:42:36","label":"index.js","metadata":{}}
+{"message":"Forbidden from access this endpoint","level":"error","timestamp":"2021-09-20 23:42:41","label":"index.js","metadata":{}}
+{"message":"Forbidden from access this endpoint","level":"error","timestamp":"2021-09-20 23:47:39","label":"index.js","metadata":{}}
+{"message":"Forbidden from access this endpoint","level":"error","timestamp":"2021-09-20 23:49:27","label":"index.js","metadata":{}}
+{"message":"Forbidden from access this endpoint","level":"error","timestamp":"2021-09-20 23:49:38","label":"index.js","metadata":{}}
+{"message":"user is not defined","level":"error","timestamp":"2021-09-21 00:05:48","label":"index.js","metadata":{}}
+{"message":"Cast to ObjectId failed for value \"{ id: '6119aba0c697e225642c4037' }\" (type Object) at path \"_id\" for model \"Admin\"","level":"error","timestamp":"2021-09-21 00:21:46","label":"index.js","metadata":{"stringValue":"\"{ id: '6119aba0c697e225642c4037' }\"","kind":"ObjectId","value":{"id":"6119aba0c697e225642c4037"},"path":"_id","reason":{},"valueType":"Object"}}
+{"message":"res.json is not a function","level":"error","timestamp":"2021-09-21 00:24:21","label":"index.js","metadata":{}}
+{"message":"error while verfing refresh token","level":"error","timestamp":"2021-09-21 00:28:53","label":"index.js","metadata":{}}
+{"message":"Unauthorized","level":"error","timestamp":"2021-09-21 00:39:21","label":"index.js","metadata":{}}

@@ -64,11 +64,11 @@ const verifyAccessToken = (req, res, next) => {
   })
 }
   
-const signRefreshToken = (payload = {}) => {
+const signRefreshToken = (payload = {}, expiresIn = '1d') => {
   return new Promise((resolve, reject) => {
     const secret = process.env.REFRESH_TOKEN_SECRET
     const options = {
-      expiresIn: '14d',
+      expiresIn,
       issuer: 'kensu',
     }
     JWT.sign(payload, secret, options, (err, token) => {
@@ -104,7 +104,7 @@ const verifyRefreshToken = (refreshToken) => {
             return
           }
           if (refreshToken === result) { 
-            return resolve(id)
+            return resolve({id: payload._id})
           }
           reject(createError.Unauthorized());
         });
